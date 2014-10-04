@@ -51,9 +51,3 @@ for category in categories[:2]:
 f = open('./train_data.db', 'w')
 pickle.dump(train_data, f)
 f.close()
-
-print train_data
-
-
-
-
