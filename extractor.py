@@ -43,10 +43,10 @@ base_dir = './101_ObjectCategories/'
 train_data = []
 
 categories = os.listdir(base_dir)
-for category in categories[:5]:
+for category in categories[:10]:
     img_dir = base_dir + category + '/'
     image_names = os.listdir(img_dir)
-    for image_name in image_names[10:20]:
+    for image_name in image_names[10:]:
         print img_dir, image_name
         img = cv2.imread(img_dir + image_name)
         h,w,c = img.shape
