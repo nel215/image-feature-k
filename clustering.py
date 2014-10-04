@@ -14,3 +14,4 @@ kmeans.fit(numpy.array(vectors))
 
 f = open('./cluster.db', 'w')
 pickle.dump(kmeans, f)
+f.close()
