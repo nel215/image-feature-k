@@ -26,7 +26,7 @@ for category in categories[:5]:
         vectors += vectorizer.extract_vectors_from_img(small_img, 9)
 
 print 'start clustering.'
-k = 1000
+k = 100
 start_time = time.clock()
 kmeans = sklearn.cluster.MiniBatchKMeans(n_clusters=k, init_size=3*k)
 kmeans.fit(vectors)

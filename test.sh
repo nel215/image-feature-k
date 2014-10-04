@@ -18,8 +18,7 @@ fi
 
 echo 'vectorize images'
 
-python vectorize_images.py
-python clustering.py
+python make_cluster.py
 python extractor.py
 python train_test.py
 
