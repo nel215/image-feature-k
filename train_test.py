@@ -17,7 +17,8 @@ def trial(data):
     features = [feature for feature, category in train_data]
     categories = [category for feature, category in train_data]
 
-    svc = sklearn.svm.SVC()
+    #svc = sklearn.svm.SVC()
+    svc = sklearn.svm.LinearSVC()
     svc.fit(features, categories)
 
     correct = 0
