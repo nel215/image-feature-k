@@ -19,8 +19,8 @@ def extract_vectors_from_img(img,patch_size=5):
     img_size = img.shape
     offset = patch_size/2
     features = []
-    for y in xrange(offset, img_size[0]):
-        for x in xrange(offset, img_size[1]):
+    for y in xrange(offset, img_size[0]-offset):
+        for x in xrange(offset, img_size[1]-offset):
             patch = cv2.getRectSubPix(img, (patch_size, patch_size), (x,y))
             features.append(extract_vector_from_patch(patch))
     return features
