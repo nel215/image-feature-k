@@ -8,7 +8,7 @@ else
     wget http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz
 fi
 
-echo 'deflate dataset'
+echo 'decompress dataset.'
 
 if [ -e ./101_ObjectCategories ]; then
     echo 'already exists.'
