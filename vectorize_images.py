@@ -2,30 +2,37 @@
 import pickle
 import os
 import cv2
+import time
+import sklearn.cluster
 
 import vectorizer
 
 base_dir = './101_ObjectCategories/'
 
-file_name = './features-2.db'
-
 vectors = []
 
 categories = os.listdir(base_dir)
-for category in categories[:2]:
+for category in categories[:5]:
     img_dir = base_dir + category + '/'
     image_names = os.listdir(img_dir)
     for image_name in image_names[0:10]:
         print "vectorize", img_dir, image_name
         img = cv2.imread(img_dir + image_name)
         h,w,c = img.shape
-        small_img = cv2.resize(img, (w/2, h/2))
-        vectors += vectorizer.extract_vectors_from_img(small_img)
+        resize_ratio = 64.1/max(h,w)
+        resize_size = (int(w*resize_ratio), int(h*resize_ratio))
+        print resize_size
+        small_img = cv2.resize(img, resize_size)
+        vectors += vectorizer.extract_vectors_from_img(small_img, 9)
 
-f = open(file_name, 'w')
-pickle.dump(vectors, f)
+print 'start clustering.'
+k = 1000
+start_time = time.clock()
+kmeans = sklearn.cluster.MiniBatchKMeans(n_clusters=k, init_size=3*k)
+kmeans.fit(vectors)
+end_time = time.clock()
+print "elasped time:", end_time - start_time
+
+f = open('./cluster.db', 'w')
+pickle.dump(kmeans, f)
 f.close()
-
-
-
-
