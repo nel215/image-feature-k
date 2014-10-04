@@ -3,35 +3,16 @@ import random
 import pickle
 import sklearn.svm
 import numpy
+import sklearn.cross_validation
 
 f = open('./train_data.db', 'r')
 data = pickle.load(f)
 f.close()
 
-def trial(data):
+features = numpy.array([feature for feature, category in data])
+categories = numpy.array([category for feature, category in data])
 
-    random.shuffle(data)
-    train_data = data[:len(data)/2]
-    test_data  = data[len(data)/2:]
+svc = sklearn.svm.LinearSVC()
+scores = sklearn.cross_validation.cross_val_score(svc, features, categories, cv = 20)
 
-    features = [feature for feature, category in train_data]
-    categories = [category for feature, category in train_data]
-
-    #svc = sklearn.svm.SVC()
-    svc = sklearn.svm.LinearSVC()
-    svc.fit(features, categories)
-
-    correct = 0
-
-    for feature, category in test_data:
-        p = svc.predict(feature)[0]
-        #print "ans:",category,
-        #print "predict:", p
-        if p == category: correct += 1
-
-    return 1.0 * correct / len(test_data)
-
-results = numpy.array([trial(data) for _ in xrange(100)])
-
-print "accuracy:", results.mean()*100, "%"
-
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
