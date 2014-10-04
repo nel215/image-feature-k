@@ -28,7 +28,7 @@ def extract_features_from_img(img, kmeans, patch_size=5):
     feature /= feature.std()
     return feature
 
-f = open('./cluster.db', 'r')
+f = open('./cluster-2.db', 'r')
 kmeans = pickle.load(f)
 f.close()
 
@@ -40,9 +40,12 @@ categories = os.listdir(base_dir)
 for category in categories[:2]:
     img_dir = base_dir + category + '/'
     image_names = os.listdir(img_dir)
-    for image_name in image_names[0:1]:
+    for image_name in image_names[10:20]:
+        print img_dir, image_name
         img = cv2.imread(img_dir + image_name)
-        feature = extract_features_from_img(img, kmeans)
+        h,w,c = img.shape
+        small_img = cv2.resize(img, (w/2, h/2))
+        feature = extract_features_from_img(small_img, kmeans)
         train_data.append((feature, category))
 
 f = open('./train_data.db', 'w')
