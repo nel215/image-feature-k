@@ -32,5 +32,5 @@ def trial(data):
 
 results = numpy.array([trial(data) for _ in xrange(100)])
 
-print results.mean()
+print "accuracy:", results.mean()*100, "%"
 
