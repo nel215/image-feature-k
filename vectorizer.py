@@ -24,9 +24,3 @@ def extract_vectors_from_img(img,patch_size=7):
             patch = cv2.getRectSubPix(img, (patch_size, patch_size), (x,y))
             features.append(extract_vector_from_patch(patch))
     return features
-
-
-if __name__=='__main__':
-    img = cv2.imread('./Parrots.bmp')
-    vectors = extract_vectors_from_img(img)
-    print vectors[0]
