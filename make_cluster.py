@@ -23,7 +23,7 @@ for category in categories[:10]:
         resize_size = (int(w*resize_ratio), int(h*resize_ratio))
         print resize_size
         small_img = cv2.resize(img, resize_size)
-        vectors += vectorizer.extract_vectors_from_img(small_img, 9)
+        vectors += vectorizer.extract_vectors_from_img(small_img)
 
 print 'start clustering.'
 k = 100

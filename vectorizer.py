@@ -15,7 +15,7 @@ def extract_vector_from_patch(patch):
     return numpy.concatenate([extract_vector_from_channel_patch(channel_patch)
         for channel_patch in cv2.split(patch)])
 
-def extract_vectors_from_img(img,patch_size=5):
+def extract_vectors_from_img(img,patch_size=7):
     img_size = img.shape
     offset = patch_size/2
     features = []

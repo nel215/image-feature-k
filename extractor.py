@@ -7,7 +7,7 @@ import numpy
 
 import vectorizer
 
-def extract_features_from_img(img, kmeans, patch_size=5):
+def extract_features_from_img(img, kmeans, patch_size=7):
     k = kmeans.get_params()['n_clusters']
     h,w,c = img.shape
     offset = patch_size/2
@@ -53,7 +53,7 @@ for category in categories[:10]:
         resize_ratio = 64.1/max(h,w)
         resize_size = (int(w*resize_ratio), int(h*resize_ratio))
         small_img = cv2.resize(img, resize_size)
-        feature = extract_features_from_img(small_img, kmeans, 9)
+        feature = extract_features_from_img(small_img, kmeans)
         train_data.append((feature, category))
 
 f = open('./train_data.db', 'w')
