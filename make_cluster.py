@@ -12,7 +12,7 @@ base_dir = './101_ObjectCategories/'
 vectors = []
 
 categories = os.listdir(base_dir)
-for category in categories[:10]:
+for category in categories:
     img_dir = base_dir + category + '/'
     image_names = os.listdir(img_dir)
     for image_name in image_names[:10]:
